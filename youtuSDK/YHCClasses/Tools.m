@@ -6,8 +6,15 @@
 //  Copyright © 2015年 Mony. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "Tools.h"
 #import "ConfigModel.h"
+
+typedef NS_ENUM(NSUInteger, NSYHCImageType) {
+    NSYHCImageTypeJPEG,
+    NSYHCImageTypePNG,
+    NSYHCImageTypeUnknown
+};
 
 @implementation Tools
 
@@ -54,6 +61,7 @@
 //    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",hostUrl,apiUrl]];
     return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",hostUrl,apiUrl]];
 }
+
 +(NSError *) getErrorCode:(NSString *)dataStr {
     
     if (![dataStr containsString:@"<title>"]) {
@@ -68,5 +76,28 @@
     NSInteger errCode = [[errorStr substringToIndex:3] intValue];
     NSError *error =[[NSError alloc]initWithDomain:[NSString stringWithFormat:@"%zu错误",errCode] code:errCode userInfo:nil];
     return error;
+}
+
+/**
+ @author Mony
+ 
+ 通过图片返回图片二进制数据
+ 
+ @param image 图片
+ 
+ @return 图片二进制数据
+ */
++ (NSData *) getImageDataByImage:(UIImage *)image {
+    NSData *data = [[NSData alloc] init];
+    //判断图片是不是png格式的文件
+    if (UIImagePNGRepresentation(image)) {
+        //返回为png图像。
+        data = UIImagePNGRepresentation(image);
+    }else {
+        //返回为JPEG图像。
+        data = UIImageJPEGRepresentation(image, 1.0);
+    }
+    
+    return data;
 }
 @end

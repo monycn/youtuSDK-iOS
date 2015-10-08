@@ -46,7 +46,18 @@
  
  @param dataStr dataStr html解析
  
- @return 返回NSError错误 */
-
+ @return 返回NSError错误 
+*/
 +(NSError *) getErrorCode:(NSString *)dataStr;
+
+/**
+ @author Mony
+ 
+ 通过图片返回图片二进制数据
+ 
+ @param image 图片
+ 
+ @return 图片二进制数据
+ */
++ (NSData *) getImageDataByImage:(UIImage *)image;
 @end

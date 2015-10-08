@@ -18,18 +18,19 @@
  @author Mony
  人脸检测（detectface）
  
- @param imagePath   图片在设备中的位置，与图片链接二选一，如都存在，以链接为准
+ @param image       图片，与图片链接二选一，如都存在，以链接为准
  @param imageUrlStr 图片链接，与图片在设备中的位置二选一，如都存在，以链接为准
  @param isBigFace   是否是大脸模式，Yes大脸，No多脸
  @param success     成功回调，返回Json串
  @param failure     失败回调，返回NSError
  */
-+ (void)detectfaceWithImagePath:(NSString *)imagePath ImageUrlStr:(NSString *)imageUrlStr
++ (void)detectfaceWithImage:(UIImage *)image ImageUrlStr:(NSString *)imageUrlStr
                       IsBigFace:(BOOL)isBigFace
                         success:(void (^)(NSDictionary  *responseDict))success
                         failure:(void (^)(NSError *error))failure {
     
-    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+//    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+    NSData *imageData = [Tools getImageDataByImage:image];
 
     NSAssert((imageData != nil || imageUrlStr != nil), @"图片数据与图片链接至少有一个！具体报错位置请部署全局断点查看。");
 
@@ -63,18 +64,19 @@
  @author Mony
  人脸定位（faceshape）
  
- @param imagePath   图片在设备中的位置，与图片链接二选一，如都存在，以链接为准
+ @param image       图片，与图片链接二选一，如都存在，以链接为准
  @param imageUrlStr 图片链接，与图片在设备中的位置二选一，如都存在，以链接为准
  @param isBigFace   是否是大脸模式，Yes大脸，No多脸
  @param success     成功回调，返回Json串
  @param failure     失败回调，返回NSError
  */
-+ (void)faceshapeWithImagePath:(NSString *)imagePath ImageUrlStr:(NSString *)imageUrlStr
++ (void)faceshapeWithImage:(UIImage *)image ImageUrlStr:(NSString *)imageUrlStr
                      IsBigFace:(BOOL)isBigFace
                        success:(void (^)(NSDictionary  *responseDict))success
                        failure:(void (^)(NSError *error))failure {
     
-    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+//    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+    NSData *imageData = [Tools getImageDataByImage:image];
     
     NSAssert((imageData != nil || imageUrlStr != nil), @"图片数据与图片链接至少有一个！具体报错位置请部署全局断点查看。");
     
@@ -108,21 +110,23 @@
  @author Mony
  人脸对比（facecompare）
  
- @param imageAPath  图片A在设备中的位置，与图片链接二选一，如都存在，以链接为准
- @param imageBPath  图片B在设备中的位置，与图片链接二选一，如都存在，以链接为准
+ @param imageA      图片A，与图片链接二选一，如都存在，以链接为准
+ @param imageB      图片B，与图片链接二选一，如都存在，以链接为准
  @param imageUrlStr 图片A链接，与图片在设备中的位置二选一，如都存在，以链接为准
  @param imageUrlStr 图片B链接，与图片在设备中的位置二选一，如都存在，以链接为准
  @param success     成功回调，返回Json串
  @param failure     失败回调，返回NSError
  */
-+ (void)facecompareWithImageAPath:(NSString *)imageAPath ImageBPath:(NSString *)imageBPath
++ (void)facecompareWithImageA:(UIImage *)imageA ImageB:(UIImage *)imageB
                      ImageAUrlStr:(NSString *)imageAUrlStr
                      ImageBUrlStr:(NSString *)imageBUrlStr
                           success:(void (^)(NSDictionary  *responseDict))success
                           failure:(void (^)(NSError *error))failure {
     
-    NSData *imageAData = [NSData dataWithContentsOfFile:imageAPath];
-    NSData *imageBData = [NSData dataWithContentsOfFile:imageBPath];
+//    NSData *imageAData = [NSData dataWithContentsOfFile:imageAPath];
+//    NSData *imageBData = [NSData dataWithContentsOfFile:imageBPath];
+    NSData *imageAData = [Tools getImageDataByImage:imageA];
+    NSData *imageBData = [Tools getImageDataByImage:imageB];
     
     NSAssert((imageAData != nil || imageAUrlStr != nil), @"图片A数据与图片A链接至少有一个！具体报错位置请部署全局断点查看。");
     NSAssert((imageBData != nil || imageBUrlStr != nil), @"图片A数据与图片A链接至少有一个！具体报错位置请部署全局断点查看。");
@@ -164,18 +168,19 @@
  @author Mony
  人脸识别（faceidentify）
  
- @param imagePath   图片在设备中的位置，与图片链接二选一，如都存在，以链接为准
+ @param image       图片，与图片链接二选一，如都存在，以链接为准
  @param imageUrlStr 图片链接，与图片在设备中的位置二选一，如都存在，以链接为准
  @param groupId     候选人组id
  @param success     成功回调，返回Json串
  @param failure     失败回调，返回NSError
  */
-+ (void)faceidentifyWithImagePath:(NSString *)imagePath ImageUrlStr:(NSString *)imageUrlStr
++ (void)faceidentifyWithImage:(UIImage *)image ImageUrlStr:(NSString *)imageUrlStr
                           GroupId:(NSString *)groupId
                           success:(void (^)(NSDictionary  *responseDict))success
                           failure:(void (^)(NSError *error))failure {
     
-    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+//    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+    NSData *imageData = [Tools getImageDataByImage:image];
     
     NSAssert((imageData != nil || imageUrlStr != nil), @"图片数据与图片链接至少有一个！具体报错位置请部署全局断点查看。");
     
@@ -212,18 +217,19 @@
  @author Mony
  人脸验证（faceverify）
  
- @param imagePath   图片在设备中的位置，与图片链接二选一，如都存在，以链接为准
+ @param image       图片，与图片链接二选一，如都存在，以链接为准
  @param imageUrlStr 图片链接，与图片在设备中的位置二选一，如都存在，以链接为准
  @param personId    待验证的Person
  @param success     成功回调，返回Json串
  @param failure     失败回调，返回NSError
  */
-+ (void)faceverifyWithImagePath:(NSString *)imagePath ImageUrlStr:(NSString *)imageUrlStr
++ (void)faceverifyWithImage:(UIImage *)image ImageUrlStr:(NSString *)imageUrlStr
                        PersonId:(NSString *)personId
                         success:(void (^)(NSDictionary  *responseDict))success
                         failure:(void (^)(NSError *error))failure {
     
-    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+//    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+    NSData *imageData = [Tools getImageDataByImage:image];
     
     NSAssert((imageData != nil || imageUrlStr != nil), @"图片数据与图片链接至少有一个！具体报错位置请部署全局断点查看。");
     
@@ -260,7 +266,7 @@
  @author Hexue
  个体创建（newperson）
  
- @param imagePath   图片在设备中的位置，与图片链接二选一，如都存在，以链接为准
+ @param image       图片，与图片链接二选一，如都存在，以链接为准
  @param imageUrlStr 图片链接，与图片在设备中的位置二选一，如都存在，以链接为准
  @param personId    指定的个体id
  @param groupIds    加入到组的列表
@@ -269,7 +275,7 @@
  @param success     成功回调，返回Json串
  @param failure     失败回调，返回NSError
  */
-+ (void)newpersonWithImagePath:(NSString *)imagePath ImageUrlStr:(NSString *)imageUrlStr
++ (void)newpersonWithImage:(UIImage *)image ImageUrlStr:(NSString *)imageUrlStr
                       PersonId:(NSString *)personId
                       GroupIds:(NSArray<NSString *> *)groupIds
                     PersonName:(NSString *)personName
@@ -277,7 +283,8 @@
                        success:(void (^)(NSDictionary  *responseDict))success
                        failure:(void (^)(NSError *error))failure {
     
-    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+//    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+    NSData *imageData = [Tools getImageDataByImage:image];
     
     NSAssert((imageData != nil || imageUrlStr != nil), @"图片数据与图片链接至少有一个！具体报错位置请部署全局断点查看。");
     
@@ -360,20 +367,21 @@
  @author Hexue
  添加人脸（addface）
  
- @param imagePath   图片在设备中的位置，与图片链接二选一，如都存在，以链接为准
+ @param image       图片，与图片链接二选一，如都存在，以链接为准
  @param imageUrlStr 图片链接，与图片在设备中的位置二选一，如都存在，以链接为准
  @param personId    待增加人脸的个体id
  @param tag         备注信息
  @param success     成功回调，返回Json串
  @param failure     失败回调，返回NSError
  */
-+ (void)addfaceWithImagePath:(NSString *)imagePath ImageUrlStr:(NSString *)imageUrlStr
++ (void)addfaceWithImage:(UIImage *)image ImageUrlStr:(NSString *)imageUrlStr
                     PersonId:(NSString *)personId
                          Tag:(NSString *)tag
                      success:(void (^)(NSDictionary  *responseDict))success
                      failure:(void (^)(NSError *error))failure {
     
-    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+//    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+    NSData *imageData = [Tools getImageDataByImage:image];
     
     NSAssert((imageData != nil || imageUrlStr != nil), @"图片数据与图片链接至少有一个！具体报错位置请部署全局断点查看。");
     
